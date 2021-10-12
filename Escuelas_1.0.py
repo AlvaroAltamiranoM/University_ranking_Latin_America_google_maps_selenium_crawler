@@ -17,7 +17,6 @@ options.add_argument("--lang=es")
 driver = webdriver.Chrome(r'', chrome_options=options)
 
 # II: Descargando y procesando datos
-# The name and location of the initial print shop that will go into the search URL
 universidad = 'Universidades'
 paises = ['Chile', 'Argentina', 'Colombia', 'México', 'Panamá', 'Ecuador', 'Uruguay', 'Perú', 'Nicaragua', 'Guatemala', 'Bolivia', 'Brasil']
 
