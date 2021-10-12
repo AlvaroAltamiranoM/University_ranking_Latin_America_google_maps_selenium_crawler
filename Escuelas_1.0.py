@@ -3,6 +3,7 @@
 Created on Sat Oct  9 21:46:00 2021
 @author: unily
 """
+# I: Importando librerias
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pandas as pd
@@ -14,14 +15,14 @@ from plotly.offline import plot
 options = Options()
 options.add_argument("--lang=es")
 driver = webdriver.Chrome(r'', chrome_options=options)
-# This is the list where we'll capture the competitors' names and addresses
-competition = []
+
+# II: Descargando y procesando datos
 # The name and location of the initial print shop that will go into the search URL
-starting_business = 'Universidades'
+universidad = 'Universidades'
 paises = ['Chile', 'Argentina', 'Colombia', 'México', 'Panamá', 'Ecuador', 'Uruguay', 'Perú', 'Nicaragua', 'Guatemala', 'Bolivia', 'Brasil']
 
 for pais in paises:
-    url = 'https://www.google.com/maps/search/' + starting_business + ' ' + pais
+    url = 'https://www.google.com/maps/search/' + universidad + ' ' + pais
 # Cargando el url
     driver.get(url)
 # Esperando que la información esté visible y ejecutando crawler:
@@ -58,7 +59,8 @@ combined_csv2 = combined_csv.loc[combined_csv['votos'] >= 500].sort_values('voto
 ranking = combined_csv2[['0','votos','rating', 'pais']]
 ranking['rating'] = ranking['rating'].str.replace(',','.')
 ranking['rating'] = pd.to_numeric(ranking['rating'], errors='coerce')
-#Gaph
+
+#III: Gaficando
 fig = px.scatter(x = ranking.votos, y = ranking.rating,
                  template = "simple_white", height = 800, text = ranking['0'],
                  size = ranking.votos, size_max=30, color = ranking.pais,
